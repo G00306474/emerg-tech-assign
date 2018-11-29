@@ -80,8 +80,9 @@ def neuralNetwork():
 
     if os.path.isfile('savedModel.h5py'): 
         model = kr.models.load_model('savedModel.h5py')
+        print("Using precreated neuralNetwork. If you wish to create your own just rename or remove from folder file named savedModel.h5py ")
     else:
-        model.fit(inputs, outputs, epochs=15, batch_size=1000)
+        model.fit(inputs, outputs, epochs=15, batch_size=100)
 
     # save the current model
     kr.models.save_model(
@@ -99,7 +100,7 @@ def neuralNetwork():
         
     test_img = ~np.array(list(test_img[16:])).reshape(10000, 784).astype(np.uint8)
     test_lbl =  np.array(list(test_lbl[ 8:])).astype(np.uint8)
-    print("Test Images correctly identified: "+(encoder.inverse_transform(model.predict(test_img)) == test_lbl).sum()+"/10000")
+    print("Test Images correctly identified: ",(encoder.inverse_transform(model.predict(test_img)) == test_lbl).sum(),"/10000")
 
 load_data()
 neuralNetwork()
