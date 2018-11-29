@@ -55,8 +55,7 @@ def neuralNetwork():
     model.add(kr.layers.Dense(units=1000, activation='relu'))
     model.add(Dropout(0.2))
     model.add(kr.layers.Dense(units=1000, activation='relu'))
-    model.add(Dropout(0.2))
-    model.add(kr.layers.Dense(units=1000, activation='relu'))
+   
 
     # Add a 10 neuron output layer.
     model.add(kr.layers.Dense(units=10, activation='softmax'))
@@ -100,7 +99,7 @@ def neuralNetwork():
         
     test_img = ~np.array(list(test_img[16:])).reshape(10000, 784).astype(np.uint8)
     test_lbl =  np.array(list(test_lbl[ 8:])).astype(np.uint8)
-    print((encoder.inverse_transform(model.predict(test_img)) == test_lbl).sum())
+    print("Test Images correctly identified: "+(encoder.inverse_transform(model.predict(test_img)) == test_lbl).sum()+"/10000")
 
 load_data()
 neuralNetwork()
