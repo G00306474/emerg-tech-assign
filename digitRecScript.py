@@ -41,7 +41,7 @@ model.add(kr.layers.Dense(units=1000, activation='relu'))
 model.add(kr.layers.Dense(units=10, activation='softmax'))
 
 # Build the graph.
-model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 with gzip.open('data/train-images-idx3-ubyte.gz', 'rb') as f:
     train_img = f.read()
 
@@ -84,9 +84,7 @@ def testMNIST():
     print("MNIST Test Images correctly identified: ",(encoder.inverse_transform(model.predict(test_img)) == test_lbl).sum(),"/10000")
 
 def loadImage():
-    
     root = tk.Tk()
-    
     root.withdraw()
     #code source https://stackoverflow.com/questions/9319317/quick-and-easy-file-dialog-in-python
     
